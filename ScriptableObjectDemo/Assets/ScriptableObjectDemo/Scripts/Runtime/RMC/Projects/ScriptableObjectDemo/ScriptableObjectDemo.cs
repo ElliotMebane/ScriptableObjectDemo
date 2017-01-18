@@ -38,12 +38,25 @@ namespace RMC.Core.Projects.ScriptableObjectDemo
         protected void Start () 
 		{
             _increaseAgeButton.onClick.AddListener(IncreaseAgeButton_OnClicked);
-		}
-
-		protected void Update () 
-		{
             Refresh();
 		}
+
+        protected void OnValidate () 
+        {
+            foreach (Person person in _persons)
+            {
+                //  The unity inspector can 'hold' empties, so check.
+                if (_persons != null)
+                {
+                    //Remove and Add EVERY time. Yes :)
+                    person.OnValidated.RemoveListener(Person_OnValidated);
+                    person.OnValidated.AddListener(Person_OnValidated);
+                    person.Validate();
+                }
+
+            }
+
+        }
 		
         //  Methods ---------------------------------------------------------------------------------
         protected void Refresh () 
@@ -51,15 +64,26 @@ namespace RMC.Core.Projects.ScriptableObjectDemo
             string text = "Persons\n";
             foreach (Person person in _persons)
             {
-                string eyeColorHex = Genes.ColorToHex(person.Genes.EyeColor);
-                text += string.Format("   >  <color='#{0}'>{1}</color>\n", eyeColorHex, person.ToString());
+                //  The unity inspector can 'hold' empties, so check.
+                if (_persons != null)
+                {
+                    string eyeColorHex = Genes.ColorToHex(person.Genes.EyeColor);
+                    text += string.Format("   >  <color='#{0}'>{1}</color>\n", eyeColorHex, person.ToString());
+                }
+
             }
             _outputText.text = text;
         }
 		
         //  Event Handlers --------------------------------------------------------------------------
+        public void Person_OnValidated (Person person) 
+        {
+            Refresh();    
+        }
+
         public void IncreaseAgeButton_OnClicked () 
 		{
+            
             foreach (Person person in _persons)
             {
                 person.IncreaseAge();

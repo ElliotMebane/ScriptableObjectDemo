@@ -5,6 +5,8 @@
 */
 
 using UnityEngine;
+using RMC.Core.Patterns.AssetObserver;
+using UnityEngine.Events;
 
 namespace RMC.Core.Projects.ScriptableObjectDemo.Assets
 {
@@ -17,18 +19,30 @@ namespace RMC.Core.Projects.ScriptableObjectDemo.Assets
     /// <summary>
     /// Replace with comments...
     /// </summary>
-    public class Genes : ScriptableObject
+    public class Genes : ScriptableObject, IAsset
 	{
-  
+
         //  Events ----------------------------------------------------------------------------------
-        public Color EyeColor   {  get  {  return _eyeColor;  } set  {  _eyeColor = value;   } }
+        private AssetEvent _onValidated = new AssetEvent();
 
         //  Properties ------------------------------------------------------------------------------
+        public Color EyeColor   {  get  {  return _eyeColor;  } set  {  _eyeColor = value;   } }
+        public AssetEvent OnValidated   {  get  {  return _onValidated;  } }
 
         //  Fields ----------------------------------------------------------------------------------
         [SerializeField] private Color _eyeColor;
 
         //  Initialization --------------------------------------------------------------------------
+
+        //  Unity Methods ---------------------------------------------------------------------------
+        protected void OnValidate()
+        {
+            if (GUI.changed)
+            {
+                Validate();
+            }
+        }
+
 		
         //  Methods ---------------------------------------------------------------------------------
         public override string ToString()
@@ -41,6 +55,12 @@ namespace RMC.Core.Projects.ScriptableObjectDemo.Assets
             return color.r.ToString("X2") + color.g.ToString("X2") + color.b.ToString("X2");
         }
 
+        public void Validate()
+        {
+            _onValidated.Invoke(this);
+        }
+
         //  Event Handlers --------------------------------------------------------------------------
+
 	}
 }
