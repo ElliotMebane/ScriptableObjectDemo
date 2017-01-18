@@ -1,4 +1,7 @@
-![Screenshot](./unity_logo_1_v1.png)
+<p align="center">
+<img src="./unity_logo_1_v1.png">
+</p>
+
 --------------
 
 What are ScriptableObjects?
