@@ -5,52 +5,49 @@
 */
 
 using UnityEngine;
+using RMC.Core.Projects.ScriptableObjectDemo.Assets;
 
-namespace RMC.Core.Projects.ScriptableObjectDemo
+namespace RMC.Core.Projects.ScriptableObjectDemo.Data
 {
 	
     //  Namespace Properties ------------------------------------------------------------------------
 
     //  Class Attributes ----------------------------------------------------------------------------
+    [System.Serializable]
 
     /// <summary>
     /// Replace with comments...
     /// </summary>
-    public class ScriptableObjectDemo : MonoBehaviour 
+    public class Person  
 	{
   
         //  Events ----------------------------------------------------------------------------------
 
         //  Properties ------------------------------------------------------------------------------
-        public string SamplePublicText  {  get  {  return _samplePublicText;  } set  {  _samplePublicText = value;  } }
-		
+        public string Name  {  get  {  return _name;  } set  {  _name = value;  } }
+        public int Age  {  get  {  return _age;  } set  {  _age = value;  } }
+        public Genes Genes  {  get  {  return _genes;  } set  {  _genes = value;  } }
+
         //  Fields ----------------------------------------------------------------------------------
-        private string _samplePublicText;
-		
+        [SerializeField] private string _name;
+        [SerializeField] private int _age = 1;
+        [SerializeField] private Genes _genes;
+
+
         //  Initialization --------------------------------------------------------------------------
 
-        //  Unity Methods ---------------------------------------------------------------------------
-        protected void Start () 
-		{
-
-		}
-
-		protected void Update () 
-		{
-			
-		}
-		
         //  Methods ---------------------------------------------------------------------------------
-        public string SamplePublicMethod (string message) 
-		{
-			return message;
-		}
-		
-		
+        public void IncreaseAge()
+        {
+            Age = Age + 1;
+        }
+
+        public override string ToString()
+        {
+            return Name + " " + Age + " " + Genes;
+        }
+
+
         //  Event Handlers --------------------------------------------------------------------------
-        public void Target_OnEventOccurred (string message) 
-		{
-			
-		}
 	}
 }

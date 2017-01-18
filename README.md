@@ -1,36 +1,23 @@
-<p align="center">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Ylen_logo.svg/120px-Ylen_logo.svg.png" alt="Entitas">
-</p>
+![Screenshot](./unity_logo_1_v1.png)
 --------------
 
-What is YLE?
+What are ScriptableObjects?
 =============
-The <a href="http://developer.yle.fi/index.en.html">Yle API</a> was opened to public in May 2015. The public API makes it possible to develop services similar with the following APIs;
-
-* Programs
-* Media
-* Metrics
+<a href="https://unity3d.com/learn/tutorials/modules/beginner/live-training-archive/scriptable-objects">Scriptable Objects</a> are amazing data containers. They don't need to be attached to a GameObject in a scene. They can be saved as assets in our project. 
 
 This Project
 =============
 
-
 Overview
 
-* Show an input field where the user can provide what programs to search for (a search query) via YLE API.
-
-Goals:
-
-* Consume YLE API.
-* Only the first 10 results should be retrieved from the API.
-* Display Finnish title per result in a scrollable list.
-* When the user scrolls to the last few items in the list, the next 10 results should be appended to the list.
+* Simple demo showing a mix of ScriptableObject and non ScriptableObject data within the same parent object so you can compare each.
 
 Technologies Used:
 
+* Unity
 * Unity UI
-* UnityWebRequest
-* UnityEngine.JsonUtility
+* ScriptableObject
+
 
 Screenshot
 =============
@@ -40,22 +27,22 @@ Screenshot
 
 Instructions
 =============
-* Open the Unity IDE (v 5.5.0 or later)
-* File -> Open Project... to the /unity/ folder in this repo.
-* File -> Open Scene... to the JSONScrollDemo.unity file.
-* Edit -> Play
+* Run the scene. 
+* Click the button below. 
+* Change the 'AmericanGenes' in the project through inspector. 
+* See all affect the output text while the scene is playing.
 
 
 Structure Overview
 =============
 
 * **/Scripts/RMC/Runtime/Core/** contains generalized code
-* **/Scripts/RMC/Runtime/Projects/JSONScrollDemo/** contains code specific for this app
+* **/Scripts/RMC/Runtime/Projects/ScriptableObjectDemo/** contains code specific for this app
 
 Code Overview
 =============
-* **JSONScrollDemo.cs** is the main entry point
-* **Constants.cs** contains easy-to-edit configuration values
+* **ScriptableObjectDemo.cs** is the main entry point
+
 
 Open Questions
 =============
