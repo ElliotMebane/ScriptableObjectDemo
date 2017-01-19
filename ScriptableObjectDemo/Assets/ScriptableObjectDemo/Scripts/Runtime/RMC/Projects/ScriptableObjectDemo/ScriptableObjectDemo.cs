@@ -70,7 +70,6 @@ namespace RMC.Core.Projects.ScriptableObjectDemo
                     string eyeColorHex = Genes.ColorToHex(person.Genes.EyeColor);
                     text += string.Format("   >  <color='#{0}'>{1}</color>\n", eyeColorHex, person.ToString());
                 }
-
             }
             _outputText.text = text;
         }

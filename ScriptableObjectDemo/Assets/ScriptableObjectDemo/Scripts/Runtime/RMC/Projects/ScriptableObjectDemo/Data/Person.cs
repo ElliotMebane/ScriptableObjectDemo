@@ -8,6 +8,7 @@ using UnityEngine;
 using RMC.Core.Projects.ScriptableObjectDemo.Assets;
 using RMC.Core.Patterns.AssetObserver;
 using UnityEngine.Events;
+using Assets.ScriptableObjectDemo.Scripts.Runtime.RMC.Projects.ScriptableObjectDemo.Data;
 
 namespace RMC.Core.Projects.ScriptableObjectDemo.Data
 {
@@ -24,16 +25,15 @@ namespace RMC.Core.Projects.ScriptableObjectDemo.Data
     /// </summary>
     public class Person
 	{
-  
         //  Events ----------------------------------------------------------------------------------
         private PersonEvent _onValidated = new PersonEvent();
 
         //  Properties ------------------------------------------------------------------------------
         public PersonEvent OnValidated   {  get  {  return _onValidated;  } }
         public string Name  {  get  {  return _name;  } set  {  _name = value; Validate();  } }
-        public int Age  {  get  {  return _age;  } set  {  _age = value; Validate();  } }
+        public int Age { get { return _age; } set { _age = value; Validate(); } }
         public Genes Genes  {  get  {  return _genes;  } }
-
+        public AbstractMutableProperties MutableProperties { get { return _mutableProperties; } set { _mutableProperties = value; Validate(); } }
 
         //  This getter seems redundant here, but its in the interface with the purpose, in theory, 
         //      to generalize the AssetObserver Pattern
@@ -43,7 +43,7 @@ namespace RMC.Core.Projects.ScriptableObjectDemo.Data
         [SerializeField] private string _name;
         [SerializeField] private int _age = 1;
         [SerializeField] private Genes _genes;
-
+        [SerializeField] private AbstractMutableProperties _mutableProperties;
 
         //  Initialization --------------------------------------------------------------------------
         public Person()
@@ -59,7 +59,7 @@ namespace RMC.Core.Projects.ScriptableObjectDemo.Data
 
         public override string ToString()
         {
-            return Name + " " + Age + " " + Genes;
+            return Name + ", " + _age + ", " + Genes + ", " + MutableProperties.Flavor;
         }
 
         public void Validate()
@@ -75,7 +75,6 @@ namespace RMC.Core.Projects.ScriptableObjectDemo.Data
                 _genes.OnValidated.RemoveListener(Asset_OnValidated);
                 _genes.OnValidated.AddListener(Asset_OnValidated);
             }
-
 
             //  Dispatch that "I or my asset have been validated so go refresh yourself :)"
             OnValidated.Invoke(this);
