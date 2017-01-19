@@ -57,6 +57,9 @@ namespace RMC.Core.Projects.ScriptableObjectDemo.Assets
 
         public void Validate()
         {
+            //  Do any value correction first...
+
+            //  Dispatch
             _onValidated.Invoke(this);
         }
 
